@@ -9,7 +9,7 @@
         <detail-comment-info :commentInfo="commentInfo" class="atComment"></detail-comment-info>
         <goods-list :goods="recommends" class="atGoods" />
         <back-top v-on:click.native="clickTop"></back-top>
-        <detail-bottom-bar />
+        <detail-bottom-bar  @addCart="addToCart" />
     </div>
 </template>
 
@@ -61,6 +61,19 @@ export default {
             console.log(123);
             
             this.$el.querySelector('.atTopBack').scrollIntoView();
+        },
+        addToCart(){
+            const product ={}
+            product.image = this.topImages[0];
+            product.title = this.goods.title;
+            product.desc = this.goods.desc;
+            product.price = this.goods.realPrice;
+            product.iid = this.iid;
+
+            this.$store.commit('addCart',product)
+           
+            
+
         }
     },
     data(){
